@@ -263,14 +263,6 @@ shinyServer(function(input, output, session) {
     tbl
   }, server = FALSE)
   
-  # Placeholder graphics
-  output$placeholder_plot <- renderPlotly(
-    plot_ly(
-      x = mtcars$mpg,
-      y = mtcars$hp, 
-      type = 'scatter',
-      mode = 'markers')
-  )
   
 })
 
