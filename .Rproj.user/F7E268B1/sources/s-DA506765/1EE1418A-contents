@@ -228,7 +228,7 @@ shinyServer(function(input, output, session) {
     sd_cols <- sd_cols[!sd_cols %in% "record_id"]
     process <- function(x) {
       x_class <- class(x)
-      out <- paste0(sort(unique(as.character(x))), collapse = ";")
+      out <- paste0(sort(unique(as.character(x))), collapse = "; ")
       if (length(out) == 1) {
         out <- as(out, x_class)
       }

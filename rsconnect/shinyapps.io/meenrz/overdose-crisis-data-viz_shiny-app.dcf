@@ -1,0 +1,12 @@
+name: overdose-crisis-data-viz_shiny-app
+title: overdose-crisis-data-viz_shiny-app
+username:
+account: meenrz
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3321618
+bundleId: 3921113
+url: https://meenrz.shinyapps.io/overdose-crisis-data-viz_shiny-app/
+when: 1606705870.11716
+asMultiple: FALSE
+asStatic: FALSE
