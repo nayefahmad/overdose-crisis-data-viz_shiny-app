@@ -1,0 +1,13 @@
+{
+    "dialog-state": {
+        "query": "alexander",
+        "path": "D:/overdose-crisis-data-viz_shiny-app",
+        "regex": false,
+        "caseSensitive": false,
+        "filePatterns": [],
+        "excludeFilePatterns": [],
+        "resultsCount": 0,
+        "errorCount": 0,
+        "replaceErrors": ""
+    }
+}

@@ -1,0 +1,95 @@
+#-------------------------------------------------------------------------------
+#
+# Nayef Ahmad - Overdose crisis visualization
+#
+# Upwork Contract ID #25566799
+#
+# Data pre-processing script
+#
+# Code style follows 'Google R Style Guide'
+# https://google.github.io/styleguide/Rguide.html
+#
+#-------------------------------------------------------------------------------
+
+rm(list = ls(all = TRUE))
+gc(reset = TRUE)
+set.seed(2020)
+
+library(rgdal)
+library(data.table)
+
+# Main data file
+remote_file <- "https://raw.githubusercontent.com/nayefahmad/overdose-crisis-data-viz/master/dst/05_join_pop_mod_cor_file.csv"
+
+dt <- fread(remote_file)
+dt[, year_study := suppressWarnings(as.numeric(year_study))]
+
+# Fills missing regions
+dt[country.factor %in% c("Australia",
+                         "Malaysia",
+                         "Myanmar",
+                         "Peoples Republic of China",
+                         "Thailand",
+                         "Vietnam"),
+   country_region := "1_East Asia & Pacific"]
+
+dt[country.factor %in% c("Austria",
+                         "Belgium",
+                         "Denmark",
+                         "Finland",
+                         "France",
+                         "Georgia",
+                         "Germany",
+                         "Iceland",
+                         "Ireland",
+                         "Netherlands",
+                         "Norway",
+                         "Portugal",
+                         "Russia",
+                         "Spain",
+                         "Sweden",
+                         "Switzerland",
+                         "United Kingdom"),
+   country_region := "2_Europe & Central Asia"]
+
+dt[country.factor %in% c("Puerto Rico"),
+   country_region := "3_Latin America"]
+
+dt[country.factor %in% c("Egypt"),
+   country_region := "4_Middle East and North Africa"]
+
+dt[country.factor %in% c("Canada",
+                         "Mexico",
+                         "United States"),
+   country_region := "5_North America"]
+
+dt[country.factor %in% c("India"),
+   country_region := "6_South Asia"]
+
+dt[country.factor %in% c("Gambia",
+                         "Kenya"),
+   country_region := "7_Sub-Saharan Africa"]
+
+# Encodes some countries to match map data
+dt[country.factor == "Vietnam", country.factor := "Viet Nam"]
+dt[country.factor == "Peoples Republic of China", country.factor := "China"]
+dt[country.factor == "Myanmar", country.factor := "Burma"]
+
+# Saves data
+saveRDS(dt, file = "data/main_data.RData")
+
+
+# Maps data---------------------------------------------------------------------
+
+download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip",
+              destfile = "data-raw/world_shape_file.zip")
+unzip("data-raw/world_shape_file.zip", overwrite = TRUE, exdir = "data-raw", unzip = "internal")
+
+world <- readOGR(paste0(getwd(), "/data-raw"), layer = "TM_WORLD_BORDERS_SIMPL-0.3", stringsAsFactors = FALSE)
+
+all_countries <- unique(dt[!is.na(country.factor), .(country_region, country.factor)])
+world <- world[world$NAME %in% all_countries$country.factor, ]
+world <- merge(world, all_countries, by.x = "NAME", by.y = "country.factor")
+
+saveRDS(world, file = "data/world.RData")
+

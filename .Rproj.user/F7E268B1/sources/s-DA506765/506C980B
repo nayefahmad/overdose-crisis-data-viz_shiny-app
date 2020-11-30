@@ -1,0 +1,25 @@
+{
+    "id": "506C980B",
+    "path": "D:/overdose-crisis-data-viz_shiny-app/ui.R",
+    "project_path": "ui.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1606702746216.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "cursorPosition": "10,0",
+        "scrollLine": "0",
+        "docOutlineVisible": "1"
+    },
+    "folds": "13|28|99|0|\n102|31|117|0|\n120|31|137|0|\n",
+    "lastKnownWriteTime": 1606701543,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1606703029249,
+    "read_only": false,
+    "read_only_alternatives": []
+}

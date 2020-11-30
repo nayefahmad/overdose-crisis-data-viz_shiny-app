@@ -1,0 +1,278 @@
+
+#-------------------------------------------------------------------------------
+#
+# Nayef Ahmad - Overdose crisis visualization
+#
+# Upwork Contract ID #25566799
+#
+# Server part of the Shiny application
+#
+# Code style follows 'Google R Style Guide'
+# https://google.github.io/styleguide/Rguide.html
+#
+#-------------------------------------------------------------------------------
+
+shinyServer(function(input, output, session) {
+  
+  # Foundational map
+  foundational_map <- shiny::reactive({
+    
+    # Allow to select only countries from selected region
+    sub_world <- world[world$country_region %in% input$input_country_region, ]
+
+    # Basic map
+    .leaflet <- leaflet() %>%
+      addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+      setView(lat = 10, lng = 0, zoom = 2) %>%
+      addPolygons(data = sub_world,
+                  fillOpacity = 0.1,
+                  opacity = 0.3,
+                  color = "#000000",
+                  weight = 2,
+                  layerId = sub_world$NAME,
+                  label = sub_world$NAME,
+                  group = "click_list")
+    
+    # Adds current selection
+    to_add <- isolate(click_list$ids)
+    if (length(to_add) > 0) {
+      for (id in to_add) {
+        country <- world[which(world$NAME %in% id), ]
+        .leaflet <- .leaflet %>%
+          addPolygons(data = country,
+                      layerId = NULL,
+                      label = country$NAME,
+                      color = "#6cb5bc",
+                      opacity = 0.2,
+                      group = id) %>%
+          addPolylines(data = country,
+                       layerId = NULL,
+                       color = "#6cb5bc",
+                       weight = 3,
+                       opacity = 1,
+                       group = id)
+      }
+    }
+    
+    .leaflet
+  })
+  
+  # Leaflet widget
+  output$geomap <- renderLeaflet({
+    foundational_map()
+  })
+
+  # Handle countries selection change (list => map)
+  observe({
+    new_selection <- input$input_countries
+    old_selection <- isolate(click_list$ids)
+    isolate(click_list$ids <- new_selection)
+    
+    if (identical(old_selection, new_selection)) {
+      return()
+    }
+    
+    # Create list for removal and addition 
+    to_remove <- setdiff(old_selection, new_selection)
+    to_add <- setdiff(new_selection, old_selection)
+    
+    # Clear existing selection
+    for (id in to_remove) {
+      leaflet::leafletProxy(mapId = "geomap") %>%
+        clearGroup(id)
+    }
+
+    # Create new selection
+    for (id in to_add) {
+      country <- world[which(world$NAME %in% id), ]
+      leaflet::leafletProxy(mapId = "geomap") %>%
+        addPolygons(data = country,
+                    layerId = NULL,
+                    label = country$NAME,
+                    color = "#6cb5bc",
+                    opacity = 0.2,
+                    group = id) %>%
+        addPolylines(data = country,
+                     layerId = NULL,
+                     color = "#6cb5bc",
+                     weight = 3,
+                     opacity = 1,
+                     group = id)
+    }
+  })
+  
+  # Handle countries selection change (map => list)
+  observe({
+    new_selection <- click_list$ids
+    updateSelectizeInput(session,
+                         inputId = "input_countries",
+                         selected = new_selection)
+  })
+  
+  # Array of clicks
+  click_list <- reactiveValues(
+    ids = vector()
+  )
+  
+  # Click handler
+  observeEvent(input$geomap_shape_click, {
+    
+    # Capture the click
+    click <- input$geomap_shape_click
+    if (is.null(click$id) & !is.null(click$group)) {
+      click$id <- click$group
+    }
+    
+    if (click$id %in% click_list$ids) {
+      click_list$ids <- click_list$ids[click_list$ids != click$id]
+    } else{
+      click_list$ids <- c(click_list$ids, click$id)
+    }
+    
+    # Just this click
+    clicked_country <- world[which(world$NAME %in% click$id), ]
+
+    if (is.null(click$id)) {
+      req(click$id)
+    } else if (!click$id %in% clicked_country@data$id) {
+
+      if (!click$id %in% click_list$ids) {
+        # Deselect country
+        leaflet::leafletProxy(mapId = "geomap") %>%
+          clearGroup(click$id)
+        
+      } else {
+        # Select country
+        leaflet::leafletProxy(mapId = "geomap") %>%
+          addPolygons(data = clicked_country,
+                      layerId = NULL,
+                      label = clicked_country$NAME,
+                      color = "#6cb5bc",
+                      opacity = 0.2,
+                      group = click$id) %>%
+          addPolylines(data = clicked_country,
+                       layerId = NULL,
+                       color = "#6cb5bc",
+                       weight = 2,
+                       opacity = 1,
+                       group = click$id)
+      }
+    }
+  })
+
+  # List of selected countries
+  output$input_countries <- renderUI({
+    
+    countries <- NULL
+    regions <- input$input_country_region
+    if (!is.null(regions)) {
+      countries <- na.omit(unique(dt[country_region %in% regions]$country.factor))
+    }
+    
+    selectizeInput(
+      inputId = "input_countries",
+      label = "Select countries",
+      choices = countries,
+      selected = countries,
+      multiple = TRUE,
+      options = NULL)
+  })
+  
+  # Filtered dataset
+  dt_filtered <- reactive({
+    
+    results <- dt
+    
+    # Filter years
+    if (!is.null(input$years_range)) {
+      results <- results[(year_study >= input$years_range[1] & 
+                            year_study <= input$years_range[2]) | is.na(year_study)]
+    }
+    
+    # Filter regions
+    if (!is.null(input$input_country_region)) {
+      results <- results[country_region %in% c(input$input_country_region, NA)]
+    } else {
+      results <- results[is.na(country_region)]
+    }
+    
+    # Filter countries
+    if (!is.null(input$input_countries)) {
+      results <- results[country.factor %in% c(input$input_countries, NA)]
+    } else {
+      results <- results[is.na(country.factor)]
+    }    
+    
+    # Filter columns
+    selected <- input$input_cols
+    has_record_id <- "record_id" %in% selected
+    if (!has_record_id) {
+      selected <- c("record_id", selected)
+    }
+    
+    if (!is.null(selected)) {
+      results <- results[, colnames(results) %in% selected, with = FALSE]
+    } else {
+      results <- results[, .()]
+    }
+    
+    # Apply data options
+    if (is.null(input$data_options)) {
+      results <- results[FALSE]
+    } else if (!("Show rows with NAs" %in% input$data_options)) {
+      results <- na.omit(results)
+    } else if (!("Show complete rows" %in% input$data_options)) {
+      results <- results[rowSums(!is.na(results)) < ncol(results)]
+    }
+    
+    # Unifies by 'record_id'
+    sd_cols <- colnames(results)
+    sd_cols <- sd_cols[!sd_cols %in% "record_id"]
+    process <- function(x) {
+      x_class <- class(x)
+      out <- paste0(sort(unique(as.character(x))), collapse = ";")
+      if (length(out) == 1) {
+        out <- as(out, x_class)
+      }
+      out
+    }
+    results <- unique(results[, (sd_cols) := lapply(.SD, process), by = record_id])
+    
+    # Checks 'record_id'
+    if (!has_record_id) {
+      results[, record_id := NULL]
+    }
+    
+    results
+  })
+  
+  # Main table
+  output$dataset <- DT::renderDataTable({
+    tbl <- DT::datatable(dt_filtered(),
+                         extensions = c('Buttons'),
+                         filter = list(position = 'top'),
+                         class = 'hover',
+                         rownames = FALSE,
+                         options = list(orderClasses = TRUE,
+                                        buttons = c("csv", "excel"),
+                                        searchHighlight = TRUE,
+                                        dom = 'Bftip',
+                                        paging = TRUE,
+                                        pageLength = 10
+                         )
+    )
+    
+    tbl
+  }, server = FALSE)
+  
+  # Placeholder graphics
+  output$placeholder_plot <- renderPlotly(
+    plot_ly(
+      x = mtcars$mpg,
+      y = mtcars$hp, 
+      type = 'scatter',
+      mode = 'markers')
+  )
+  
+})
+

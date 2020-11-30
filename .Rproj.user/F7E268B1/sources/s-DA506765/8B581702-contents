@@ -1,0 +1,512 @@
+results
+is.na(results)
+results[is.na(results)]
+results[, is.na(results)]
+results[is.na(results), ]
+is.na(results)
+rowMins(is.na(results))
+rowMin(is.na(results))
+rowsum(is.na(results))
+class(is.na(results))
+rowSums(is.na(results))
+rowSums(is.na(results)) == ncol(results)
+sum(rowSums(is.na(results)) == ncol(results))
+rowSums(!is.na(results)) == ncol(results)
+results[rowSums(!is.na(results)) == ncol(results)]
+runApp()
+dt
+dt[, .(country_region, country.factor)]
+unique(dt[, .(country_region, country.factor)])
+unique(dt[, .(country_region, country.factor)])[order(country_region, country.factor)]
+runApp()
+runApp()
+runApp()
+library(shiny); runApp('docs/map.R')
+comarea606
+comarea606
+# import City of Chicago current community area boundaries
+comarea606 <- readRDS( gzcon( url( description = "https://github.com/cenuno/shiny/raw/master/cps_locator/Data/raw-data/comarea606_raw.RDS" ) ) )
+comarea606
+names(comarea606)
+comarea606$community
+runApp('docs/map.R')
+runApp('docs/map.R')
+library(shiny); runApp('docs/map.R')
+runApp('docs/map.R')
+comarea606$community
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+comarea606$community
+# import City of Chicago current community area boundaries
+comarea606 <- readRDS( gzcon( url( description = "https://github.com/cenuno/shiny/raw/master/cps_locator/Data/raw-data/comarea606_raw.RDS" ) ) )
+comarea606$community
+?hideGroup
+runApp('docs/map.R')
+runApp('map.R')
+runApp('docs/map.R')
+library(shiny); runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+# load necessary packages
+library( leaflet )
+library( shiny )
+library( shinydashboard )
+# import City of Chicago current community area boundaries
+comarea606 <- readRDS( gzcon( url( description = "https://github.com/cenuno/shiny/raw/master/cps_locator/Data/raw-data/comarea606_raw.RDS" ) ) )
+comarea606
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+runApp('docs/map.R')
+shiny::runApp()
+# Reads data
+# TODO: cache downloded file
+remote_file <- "https://raw.githubusercontent.com/nayefahmad/overdose-crisis-data-viz/master/dst/05_join_pop_mod_cor_file.csv"
+dt <- fread(remote_file)
+# Prepares data extracts
+cols <- sort(colnames(dt))
+country_regions <- sort(na.omit(unique(dt$country_region)))
+dt[, year_study := suppressWarnings(as.numeric(year_study))]
+dt
+dt$year_study
+rm(list = ls(all = TRUE))
+gc(reset = TRUE)
+set.seed(2020)
+library(data.table)
+# Reads data
+dt <- readRDS("data/main_data.RData")
+remote_file <- "https://raw.githubusercontent.com/nayefahmad/overdose-crisis-data-viz/master/dst/05_join_pop_mod_cor_file.csv"
+dt <- fread(remote_file)
+dt[, year_study := suppressWarnings(as.numeric(year_study))]
+saveRDS(dt, file = "data/main_data.RData")
+# Reads data
+dt <- readRDS("data/main_data.RData")
+dt
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+runApp()
+dt
+dt[, .N, by = (country_region, country.factor)]
+dt[, .N, by = .(country_region, country.factor)]
+dt[, .N, by = .(country_region, country.factor)][order(country.factor)]
+dt[, .N, by = .(country_region, country.factor)][order(country.factor, -N)]
+dt[, .N, by = .(country_region, country.factor)][order(country_region, country.factor, -N)]
+dt[country.factor %in% c("Australia",
+"Malaysia",
+"Myanmar",
+"Peoples Republic of China",
+"Thailand",
+"Vietnam"),
+country_region := "1_East Asia & Pacific"]
+dt[, .N, by = .(country_region, country.factor)][order(country_region, country.factor, -N)]
+dt[country.factor %in% c("Austria",
+"Belgium",
+"Denmark",
+"Finland",
+"France",
+"Georgia",
+"Germany",
+"Iceland",
+"Ireland",
+"Netherlands",
+"Norway",
+"Portugal",
+"Russia",
+"Spain",
+"Sweden",
+"Switzerland",
+"United Kingdom"),
+country_region := "2_Europe & Central Asia"]
+dt[, .N, by = .(country_region, country.factor)][order(country_region, country.factor, -N)]
+dt[country.factor %in% c("Austria",
+"Belgium",
+"Denmark",
+"Finland",
+"France",
+"Georgia",
+"Germany",
+"Iceland",
+"Ireland",
+"Netherlands",
+"Norway",
+"Portugal",
+"Russia",
+"Spain",
+"Sweden",
+"Switzerland",
+"United Kingdom"),
+country_region := "2_Europe & Central Asia"]
+dt[country.factor %in% c("Puerto Rico"),
+country_region := "3_Latin America"]
+dt[country.factor %in% c("Egypt"),
+country_region := "4_Middle East and North Africa"]
+dt[country.factor %in% c("Canada",
+"Mexico",
+"United States"),
+country_region := "5_North America"]
+dt[country.factor %in% c("India"),
+country_region := "6_South Asia"]
+dt[country.factor %in% c("Puerto Rico"),
+country_region := "3_Latin America"]
+dt[country.factor %in% c("Egypt"),
+country_region := "4_Middle East and North Africa"]
+dt[country.factor %in% c("Canada",
+"Mexico",
+"United States"),
+country_region := "5_North America"]
+dt[country.factor %in% c("India"),
+country_region := "6_South Asia"]
+dt[country.factor %in% c("Gambia",
+"Kenya"),
+country_region := "7_Sub-Saharan Africa"]
+dt[, .N, by = .(country_region, country.factor)][order(country_region, country.factor, -N)]
+dt[, .N, by = .(country_region, country.factor)][order(country.factor, -N)]
+library(data.table)
+# Main data file
+remote_file <- "https://raw.githubusercontent.com/nayefahmad/overdose-crisis-data-viz/master/dst/05_join_pop_mod_cor_file.csv"
+dt <- fread(remote_file)
+dt[, year_study := suppressWarnings(as.numeric(year_study))]
+# Fills missing regions
+dt[country.factor %in% c("Australia",
+"Malaysia",
+"Myanmar",
+"Peoples Republic of China",
+"Thailand",
+"Vietnam"),
+country_region := "1_East Asia & Pacific"]
+dt[country.factor %in% c("Austria",
+"Belgium",
+"Denmark",
+"Finland",
+"France",
+"Georgia",
+"Germany",
+"Iceland",
+"Ireland",
+"Netherlands",
+"Norway",
+"Portugal",
+"Russia",
+"Spain",
+"Sweden",
+"Switzerland",
+"United Kingdom"),
+country_region := "2_Europe & Central Asia"]
+dt[country.factor %in% c("Puerto Rico"),
+country_region := "3_Latin America"]
+dt[country.factor %in% c("Egypt"),
+country_region := "4_Middle East and North Africa"]
+dt[country.factor %in% c("Canada",
+"Mexico",
+"United States"),
+country_region := "5_North America"]
+dt[country.factor %in% c("India"),
+country_region := "6_South Asia"]
+dt[country.factor %in% c("Gambia",
+"Kenya"),
+country_region := "7_Sub-Saharan Africa"]
+# Saves data
+saveRDS(dt, file = "data/main_data.RData")
+dt <- readRDS("data/main_data.RData")
+# Prepares data extracts
+cols <- sort(colnames(dt))
+country_regions <- sort(na.omit(unique(dt$country_region)))
+years <- range(dt$year_study, na.rm = TRUE)
+runApp()
+download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip",
+destfile="data/world_shape_file.zip")
+system("unzip data/world_shape_file.zip")
+unzip("data/world_shape_file.zip", overwrite = TRUE, exdir = "data", unzip = "internal")
+unzip("data/world_shape_file.zip", overwrite = TRUE, exdir = "data", unzip = "internal")
+library(rgdal)
+install.packages('rgdal')
+library(rgdal)
+library(data.table)
+world_spdf <- readOGR(
+dsn = paste0(getwd(),"data") ,
+layer = "TM_WORLD_BORDERS_SIMPL-0.3",
+verbose = FALSE
+)
+world_spdf <- readOGR(
+dsn = paste0(getwd(), "/data") ,
+layer = "TM_WORLD_BORDERS_SIMPL-0.3",
+verbose = FALSE
+)
+world_spdf
+world_spdf <- readOGR(paste0(getwd(), "/data"), layer = "TM_WORLD_BORDERS_SIMPL-0.3")
+world_spdf
+leaflet(world_spdf) %>%
+addTiles()  %>%
+setView( lat=10, lng=0 , zoom=2)
+library(leaflet)
+leaflet(world_spdf) %>%
+addTiles()  %>%
+setView( lat=10, lng=0 , zoom=2)
+leaflet(world_spdf) %>%
+addTiles()
+world_spdf
+world_spdf@data
+world_spdf %>% names
+world_spdf
+leaflet(world_spdf) %>%
+addTiles()  %>%
+setView( lat=10, lng=0 , zoom=2) %>%
+addPolygons( fillColor = ~mypalette(POP2005), stroke=FALSE )
+leaflet(world_spdf) %>%
+addTiles()  %>%
+setView( lat=10, lng=0 , zoom=2) %>%
+addPolygons( fillColor = ~mypalette(POP2005), stroke=FALSE )
+mypalette <- colorNumeric( palette="viridis", domain=world_spdf@data$POP2005, na.color="transparent")
+mypalette(c(45,43))
+world_spdf@data$POP2005[ which(world_spdf@data$POP2005 == 0)] = NA
+world_spdf@data$POP2005 <- as.numeric(as.character(world_spdf@data$POP2005)) / 1000000 %>% round(2)
+mypalette <- colorNumeric( palette="viridis", domain=world_spdf@data$POP2005, na.color="transparent")
+mypalette(c(45,43))
+leaflet(world_spdf) %>%
+addTiles()  %>%
+setView( lat=10, lng=0 , zoom=2) %>%
+addPolygons( fillColor = ~mypalette(POP2005), stroke=FALSE )
+world_spdf@data$POP2005[ which(world_spdf@data$POP2005 == 0)]
+world_spdf@data
+world_spdf@data$NAME
+as.character(world_spdf@data$NAME)
+as.character(world_spdf@data$NAME)
+# Main data file
+remote_file <- "https://raw.githubusercontent.com/nayefahmad/overdose-crisis-data-viz/master/dst/05_join_pop_mod_cor_file.csv"
+dt <- fread(remote_file)
+dt[, year_study := suppressWarnings(as.numeric(year_study))]
+# Fills missing regions
+dt[country.factor %in% c("Australia",
+"Malaysia",
+"Myanmar",
+"Peoples Republic of China",
+"Thailand",
+"Vietnam"),
+country_region := "1_East Asia & Pacific"]
+dt[country.factor %in% c("Austria",
+"Belgium",
+"Denmark",
+"Finland",
+"France",
+"Georgia",
+"Germany",
+"Iceland",
+"Ireland",
+"Netherlands",
+"Norway",
+"Portugal",
+"Russia",
+"Spain",
+"Sweden",
+"Switzerland",
+"United Kingdom"),
+country_region := "2_Europe & Central Asia"]
+dt[country.factor %in% c("Puerto Rico"),
+country_region := "3_Latin America"]
+dt[country.factor %in% c("Egypt"),
+country_region := "4_Middle East and North Africa"]
+dt[country.factor %in% c("Canada",
+"Mexico",
+"United States"),
+country_region := "5_North America"]
+dt[country.factor %in% c("India"),
+country_region := "6_South Asia"]
+dt[country.factor %in% c("Gambia",
+"Kenya"),
+country_region := "7_Sub-Saharan Africa"]
+# Saves data
+saveRDS(dt, file = "data/main_data.RData")
+dt$country.factor
+unique(dt$country.factor)
+all_countries <- unique(na.omit(dt$country.factor))
+all_countries
+world_spdf@data
+world_spdf@data[world_spdf@data$NAME %in% all_countries, ]
+world_spdf@data$NAME %in% all_countries
+all_countries %in% world_spdf@data$NAME
+all_countries[all_countries %in% world_spdf@data$NAME]
+all_countries[!all_countries %in% world_spdf@data$NAME]
+sort(unique(world_spdf@data$NAME))
+all_countries[!all_countries %in% world_spdf@data$NAME]
+dt[contry.factor == "Vietnam"]
+dt[country.factor == "Vietnam"]
+all_countries[!all_countries %in% world_spdf@data$NAME]
+sort(unique(world_spdf@data$NAME))
+dt[country.factor == "Vietnam", country.factor := "Viet Nam"]
+all_countries <- unique(na.omit(dt$country.factor))
+all_countries[!all_countries %in% world_spdf@data$NAME]
+all_countries[!all_countries %in% world_spdf@data$NAME]
+dt[country.factor == "Peoples Republic of China", country.factor := "China"]
+all_countries <- unique(na.omit(dt$country.factor))
+all_countries[!all_countries %in% world_spdf@data$NAME]
+sort(unique(world_spdf@data$NAME))
+dt[country.factor == "Vietnam", country.factor := "Viet Nam"]
+dt[country.factor == "Peoples Republic of China", country.factor := "China"]
+dt[country.factor == "Myanmar", country.factor := "Burma"]
+# Saves data
+saveRDS(dt, file = "data/main_data.RData")
+all_countries <- unique(na.omit(dt$country.factor))
+world_spdf@data[world_spdf@data$NAME %in% all_countries, ]
+nrow(world_spdf@data[world_spdf@data$NAME %in% all_countries, ])
+world_spdf@data <- world_spdf@data[world_spdf@data$NAME %in% all_countries, ]
+leaflet(world_spdf) %>%
+addTiles()  %>%
+setView( lat=10, lng=0 , zoom=2) %>%
+addPolygons( fillColor = ~mypalette(POP2005), stroke=FALSE )
+world_spdf
+comarea606
+# import City of Chicago current community area boundaries
+comarea606 <- readRDS( gzcon( url( description = "https://github.com/cenuno/shiny/raw/master/cps_locator/Data/raw-data/comarea606_raw.RDS" ) ) )
+comarea606
+comarea606
+comarea606@data
+comarea606@community
+comarea606$community
+comarea606$community %>% class
+getSlots(world_spdf)
+slotNames(world_spdf)
+slot(world_spdf, "country")
+slot(world_spdf, "country", check = TRUE)
+world_spdf$NAME
+, zoom = 11 ) %>%
+addPolygons( data = world_spdf
+'
+""
+]\
+,
+,
+,
+,
+''1234
+leaflet() %>%
+addTiles( urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+setView( lng = -87.567215
+, lat = 41.822582
+, zoom = 11 ) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0
+, opacity = 0.2
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+leaflet() %>%
+addTiles( urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+# setView( lng = -87.567215
+#          , lat = 41.822582
+#          , zoom = 11 ) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0
+, opacity = 0.2
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+world_spdf <- readOGR(paste0(getwd(), "/data"), layer = "TM_WORLD_BORDERS_SIMPL-0.3", stringsAsFactors = FALSE)
+all_countries <- unique(na.omit(dt$country.factor))
+world_spdf@data[world_spdf@data$NAME %in% all_countries, ]
+world_spdf@data <- world_spdf@data[world_spdf@data$NAME %in% all_countries, ]
+slotNames(world_spdf)
+world_spdf@data %>% dim
+world_spdf@polygons %>% dim
+world_spdf@polygons
+class(world_spdf)
+download.file("http://thematicmapping.org/downloads/TM_WORLD_BORDERS_SIMPL-0.3.zip",
+destfile = "data/world_shape_file.zip")
+unzip("data/world_shape_file.zip", overwrite = TRUE, exdir = "data", unzip = "internal")
+world_spdf <- readOGR(paste0(getwd(), "/data"), layer = "TM_WORLD_BORDERS_SIMPL-0.3", stringsAsFactors = FALSE)
+all_countries <- unique(na.omit(dt$country.factor))
+world_spdf <- world_spdf[NAME %in% all_countries, ]
+world_spdf <- world_spdf[world_spdf$NAME %in% all_countries, ]
+world_spdf
+leaflet() %>%
+addTiles( urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+# setView( lng = -87.567215
+#          , lat = 41.822582
+#          , zoom = 11 ) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0
+, opacity = 0.2
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+leaflet() %>%
+addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+setView(lat = 10, lng = 0, zoom = 2) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0
+, opacity = 0.2
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+leaflet() %>%
+addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+setView(lat = 10, lng = 0, zoom = 2) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0
+, opacity = 0.9
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+leaflet() %>%
+addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+setView(lat = 10, lng = 0, zoom = 2) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0.5
+, opacity = 0.9
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+leaflet() %>%
+addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+setView(lat = 10, lng = 0, zoom = 2) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0.1
+, opacity = 0.9
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)
+leaflet() %>%
+addTiles(urlTemplate = "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png") %>%
+setView(lat = 10, lng = 0, zoom = 2) %>%
+addPolygons( data = world_spdf
+, fillOpacity = 0.1
+, opacity = 0.9
+, color = "#000000"
+, weight = 2
+, layerId = world_spdf$NAME
+, group = "click.list"
+)

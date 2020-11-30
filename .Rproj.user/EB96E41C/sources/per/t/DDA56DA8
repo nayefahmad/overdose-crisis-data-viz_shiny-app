@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1605732358305.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4276073623",
+    "id" : "DDA56DA8",
+    "lastKnownWriteTime" : 1605737882,
+    "last_content_update" : 1605737882027,
+    "path" : "~/Documents/Dropbox/Work/Upwork/25566799 - make_improvements_to_an_r_shiny_app/data_preprocessing.R",
+    "project_path" : "data_preprocessing.R",
+    "properties" : {
+        "cursorPosition" : "94,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

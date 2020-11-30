@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1605742842636.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4232094104",
+    "id" : "4D15CC99",
+    "lastKnownWriteTime" : 1605826232,
+    "last_content_update" : 1605826232654,
+    "path" : "~/Documents/Dropbox/Work/Upwork/25566799 - make_improvements_to_an_r_shiny_app/global.R",
+    "project_path" : "global.R",
+    "properties" : {
+        "cursorPosition" : "35,0",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 5,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1605532784950.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4149275456",
+    "id" : "234A2D6C",
+    "lastKnownWriteTime" : 1605703151,
+    "last_content_update" : 1605703151688,
+    "path" : "~/Documents/Dropbox/Work/Upwork/25566799 - make_improvements_to_an_r_shiny_app/docs/map.R",
+    "project_path" : "docs/map.R",
+    "properties" : {
+        "cursorPosition" : "52,32",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

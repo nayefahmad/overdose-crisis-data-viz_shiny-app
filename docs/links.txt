@@ -1,0 +1,2 @@
+https://rstudio.github.io/leaflet/shapes.html
+https://www.r-graph-gallery.com/183-choropleth-map-with-leaflet.html
