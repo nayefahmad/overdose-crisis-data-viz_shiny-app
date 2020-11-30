@@ -99,23 +99,6 @@ dataset_Ui <- function(id) {
   )
 }
 
-# Highlights Menu
-highlights_Ui <- function(id) {
-  bs4TabItem(tabName = "highlights",
-             fluidRow(title = "Highlights",
-                      column(width = 12,
-                             bs4Card(
-                               title = "Highlights (placeholder)", 
-                               status = "secondary",
-                               closable = FALSE,
-                               collapsible = FALSE,
-                               width = 12,
-                               plotlyOutput('placeholder_plot')
-                             )
-                      )
-             )
-  )
-}
 
 # Background Menu
 background_Ui <- function(id) {
@@ -159,14 +142,13 @@ shinyUI(bs4DashPage(
     title = tags$b("Menu"),
     brandColor = "gray",
     src = "logo.png",
-    url = "http://bccdc.ca",
+    url = "http://covid-19.bccdc.ca/",
     bs4SidebarMenu(
       id = "sidebar_menu",
       flat = FALSE,
       compact = FALSE,
       child_indent = TRUE,
       bs4SidebarMenuItem("Dataset", tabName = "dataset", icon = "database"),
-      bs4SidebarMenuItem("Highlights", tabName = "highlights", icon = "highlighter"),
       bs4SidebarMenuItem("Background", tabName = "background", icon = "file-alt")
     )
   ),
@@ -180,7 +162,6 @@ shinyUI(bs4DashPage(
     
     bs4TabItems(
       dataset_Ui(id = "dataset"),
-      highlights_Ui(id = "highlights"),
       background_Ui(id = "background")
     )
   )
