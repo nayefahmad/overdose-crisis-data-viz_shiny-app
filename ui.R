@@ -56,7 +56,7 @@ dataset_Ui <- function(id) {
               choices = cols,
               selected = c("record_id", "year_study", "country_region", 
                            "country.factor", "policy_type", "policy_specific", 
-                           "out_specific"),
+                           "out_specific", "Reference"),
               multiple = TRUE,
               options = NULL),
             
