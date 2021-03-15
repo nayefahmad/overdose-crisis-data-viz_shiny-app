@@ -13,6 +13,6 @@ These are the main code files:
 
 
 ## Updating the published version of the app 
-1. First make sure to download the latest version of this repo. 
-2. Then make any changes locally in RStudio, and click the "Run App" button. 
-3. When the app runs, in the top right, there will be an option to publish the app. You will have to log in to the shinyapps.io account, and then you can publish the app. 
+1. First make sure to download the latest version of this repository. [This page](https://www.itprotoday.com/mobile-management-and-security/how-do-i-download-files-github) has instructions on how to download repositories from GitHub. 
+2. Once you have downloaded the repository, make any changes locally in RStudio, and click the "Run App" button. This will launch the app on your computer, but will not change the live version of the app.  
+3. When the app runs locally in RStudio, there will be an option to publish the app in the top right corner of the window. Click that button, and you will be asked to log in to a shinyapps.io account. After logging in to the account you want to use, you can re-publish the app. This will ensure that your changes are reflected in the live version of the app.  
